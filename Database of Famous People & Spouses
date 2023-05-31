@@ -1,0 +1,145 @@
+/* Create tables about the people and what they do */
+
+ 
+
+CREATE TABLE movie_stars (id INTEGER PRIMARY KEY autoincrement, fullname TEXT, movies TEXT, release_year INTEGER);
+
+ 
+
+CREATE TABLE celebrity_spouses (id INTEGER PRIMARY KEY autoincrement, fullname TEXT, spouse_name TEXT, years_married INTEGER);
+
+ 
+
+CREATE TABLE spouse_status (id INTEGER PRIMARY KEY autoincrement, spouse_name TEXT, fame_status TEXT);
+
+ 
+
+/* adding celebrity info based off of movies celebrities are in*/
+
+INSERT INTO movie_stars VALUES (1,"jennifer lopez", "hustlers", 2019);
+
+INSERT INTO movie_stars VALUES (2, "ben afleck", "jersey girls", 2004);
+
+INSERT INTO movie_stars VALUES (3, "angelina jolie", "eternals", 2021);
+
+INSERT INTO movie_stars VALUES (4, "jason momoa", "aquaman", 2018);
+
+INSERT INTO movie_stars VALUES (5,"lisa bonnet", "the red road", 2014);
+
+INSERT INTO movie_stars VALUES (6, "elizabeth olsen", "avengers infinity war", 2018);
+
+INSERT INTO movie_stars VALUES (7, "will smith", "i am legend", 2007);
+
+INSERT INTO movie_stars VALUES (8, "jada smith", "matrix resurrections", 2021);
+
+INSERT INTO movie_stars VALUES (9, "jenna ortega", "scream vi", 2023);
+
+INSERT INTO movie_stars VALUES (10,"vannessa anne hudgens", "bad boys for life", 2020);
+
+INSERT INTO movie_stars VALUES (11, "zac efron", "baywatch", 2017);
+
+INSERT INTO movie_stars VALUES (12, "leonardo dicaprio", "titanic", 1997);
+
+INSERT INTO movie_stars VALUES (13, "ryan reynolds", "deadpool", 2016);
+
+INSERT INTO movie_stars VALUES (14, "blake lively", "the age of adaline", 2015);
+
+INSERT INTO movie_stars VALUES (15, "kevin hart", "central intelligence", 2016);
+
+ 
+
+/*adding data on celebrtieis and their spouses*/
+
+INSERT INTO celebrity_spouses VALUES (1,"jennifer lopez","ben afleck", 1);
+
+INSERT INTO celebrity_spouses VALUES (2, "ben afleck", "jennifer lopez", 1);
+
+INSERT INTO celebrity_spouses VALUES (3, "angelina jolie", "not married", null);
+
+INSERT INTO celebrity_spouses VALUES (4, "jason momoa", "lisa bonnet", 6);
+
+INSERT INTO celebrity_spouses VALUES (5, "lisa bonnet", "jason momoa", 6);
+
+INSERT INTO celebrity_spouses VALUES (6, "elizabeth olsen", "robbie arnett", 3);
+
+INSERT INTO celebrity_spouses VALUES (7, "will smith", "jada smith", 26);
+
+INSERT INTO celebrity_spouses VALUES (8, "jada smith", "will smith", 26);
+
+INSERT INTO celebrity_spouses VALUES (9, "jenna ortega", "not married", null);
+
+INSERT INTO celebrity_spouses VALUES (10, "vanessa anne hudgens", "not married", null);
+
+INSERT INTO celebrity_spouses VALUES (11, "zac efron", "not married", null);
+
+INSERT INTO celebrity_spouses VALUES (12, "leonardo dicaprio", "not married", null);
+
+INSERT INTO celebrity_spouses VALUES (13, "ryan reynolds", "blake lively", 11);
+
+INSERT INTO celebrity_spouses VALUES (14, "blake lively", "ryan reynolds", 11);
+
+INSERT INTO celebrity_spouses VALUES (15, "kevin hart", "eniko hart", 8);
+
+ 
+
+/*adding data based off of celebrity spouse fame status*/
+
+INSERT INTO spouse_status VALUES (1, "ben afleck", "famous");
+
+INSERT INTO spouse_status VALUES (2, "jennifer lopez", "famous");
+
+INSERT INTO spouse_status VALUES (3, null, null);
+
+INSERT INTO spouse_status VALUES (4, "lisa bonnet", "famous");
+
+INSERT INTO spouse_status VALUES (5, "jason momoa", "famous");
+
+INSERT INTO spouse_status VALUES (6, "robbie arnett", "not famous");
+
+INSERT INTO spouse_status VALUES (7, "jada smith", "famous");
+
+INSERT INTO spouse_status VALUES (8, "will smith","famous");
+
+INSERT INTO spouse_status VALUES (9, null, null);
+
+INSERT INTO spouse_status VALUES (10, null, null);
+
+INSERT INTO spouse_status VALUES (11, null, null);
+
+INSERT INTO spouse_status VALUES (12, null, null);
+
+INSERT INTO spouse_status VALUES (13, "blake lively", "famous");
+
+INSERT INTO spouse_status VALUES (14, "ryan reynolds", "famous");
+
+INSERT INTO spouse_status VALUES (15, "eniko hart", "not famous");
+
+ 
+
+ 
+
+/*find data on movie stars starring in movies before 2010*/
+
+SELECT fullname,movies FROM movie_stars
+
+WHERE release_year < 2010;
+
+ 
+
+/*list of movie star spouses to see if they are married to each other or married at all*/
+
+SELECT movie_stars.fullname, celebrity_spouses.spouse_name, celebrity_spouses.years_married FROM movie_stars
+
+JOIN celebrity_spouses
+
+ON movie_stars.fullname = celebrity_spouses.fullname;
+
+ 
+
+/*query to determine if a celebrity spouse is also a celebrity*/
+
+SELECT celebrity_spouses.fullname, celebrity_spouses.spouse_name, spouse_status.fame_status FROM celebrity_spouses
+
+LEFT JOIN spouse_status
+
+ON celebrity_spouses.spouse_name = spouse_status.spouse_name;
