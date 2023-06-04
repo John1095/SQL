@@ -1,0 +1,22 @@
+-- Running this query to determine how many of the entries in this databasea are movies.
+SELECT COUNT(type) FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+WHERE type = 'Movie';
+
+--Determining the show or movie that was most recently released.
+select max(date(date_added))
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info";
+
+--Listing all entry titles and their type in alphabetical order
+SELECT title, type FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" 
+ORDER BY title ASC;
+
+--Running a query to determine who the director for Bright Star is.
+SELECT netflix_people.director, netflix_titles_info.title FROM "CharlotteChaze/BreakIntoTech"."netflix_people"
+LEFT JOIN  "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+ON "netflix_people".show_id=netflix_titles_info.show_id
+WHERE title = 'Bright Star';
+
+--Running Query to determine what the oldest movie in the database is.
+SELECT title, release_year FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
+ORDER BY release_year ASC
+LIMIT 2;
